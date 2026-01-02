@@ -39,7 +39,7 @@ class UserInput(BaseModel):
     def normalize_city(cls,v:str) -> str:
         v= v.strip().title
         return v
-        
+
     @computed_field
     @property
     def bmi(self) -> float:
@@ -75,6 +75,19 @@ class UserInput(BaseModel):
             return 2
         else:
             return 3
+
+#human readable
+@app.get('/')
+def home():
+    return {"message":"Insurance Prediction Api"}
+
+#machine readable (for aws,ecs,kubernates)
+@app.get("/health-check")
+def health_check():
+    return {
+        "status": "ok"
+    }
+
 
 @app.post('/predict')
 def predict_premium(data: UserInput):
