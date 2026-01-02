@@ -23,6 +23,7 @@ def health_check():
     }
 
 
+
 @app.post('/predict', response_model=PredictionResponse)
 def predict_premium(data: UserInput):
 
